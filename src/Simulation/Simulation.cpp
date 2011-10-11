@@ -574,7 +574,7 @@ double Simulation::calculateCOMKineticEnergy()
 	Cloud* cloud1 = (*localClouds)[0];
 	Cloud* cloud2 = (*localClouds)[1];
 
-	velocity = cloud1->velocity_ - cloud2->velocity_;
+	velocity = (*cloud1->getVelocity()) - (*cloud2->getVelocity());
 	//vector<Particle*>* localParticles = entityManager_->getParticles();
 	//vector<Particle*>::iterator i;
 
