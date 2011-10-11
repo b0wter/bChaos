@@ -68,6 +68,7 @@ Simulation::Simulation(int argc, char** argv)
 		cerr << setprecision(12)<< left << setw(30) << "Total energy at beginning: " << totalEnergyStart << endl;
 
 		// Output statistics once to include the starting positions in the data file
+		this->outputStatisticsHeader();
 		this->outputStatistics();
 
 		//cerr << simulationOptions_->harmonicInteractionMatrix;
@@ -251,6 +252,50 @@ void Simulation::checkBoundaryConditions()
 	}
 }
 
+void Simulation::outputStatisticsHeader()
+{
+	cout << "#";
+	if(simulationOptions_->outputParticleData)
+	{
+		vector<Particle*>* localParticles = entityManager_->getParticles();
+		for(unsigned int i = 0; i < localParticles->size(); i++)
+		{
+
+			cout << "Particle " << i << " X\tY           \t";
+		}
+	}
+
+	if(simulationOptions_->outputCloudData)
+	{
+		//output, cloud header
+		vector<Cloud*>* localClouds = entityManager_->getClouds();
+		for(unsigned int i = 0; i < localClouds->size(); i++)
+		{
+			cout << "Cloud " << i << " X\tY\t";
+		}
+
+		//output, mean cloud
+		cout << "Center X\tY";
+	}
+
+	if(simulationOptions_->outputTotalEnergy)
+		cout << "Total energy\t";
+	if(simulationOptions_->outputKineticEnergy)
+		cout << "Kin. energy\t";
+	if(simulationOptions_->outputPotentialEnergy)
+		cout << "Pot. energy\t";
+	if(simulationOptions_->outputCOMKineticEnergy)
+		cout << "COM Kin. En.\t";
+	if(simulationOptions_->outputAvgCloudRadius)
+	{
+		vector<Cloud*>* localClouds = entityManager_->getClouds();
+		for(unsigned int i = 0; i < localClouds->size(); i++)
+		{
+			cout << "C " << i << " Avg. Rad.\t";
+		}
+	}
+	cout << endl;
+}
 
 //! Outputs the generated calculations.
 /*!
@@ -310,6 +355,9 @@ void Simulation::outputStatistics()
 
 	if(simulationOptions_->outputPotentialEnergy)
 		cout << calculatePotentialEnergy() << "\t";
+
+	if(simulationOptions_->outputCOMKineticEnergy)
+		cout << calculateCOMKineticEnergy() << "\t";
 
 	cout << endl;
 }
@@ -508,6 +556,35 @@ double Simulation::calculateKineticEnergy()
 		eKin += 0.5 * (*i)->mass_ * (*i)->velocity_.squaredNorm();
 
 	return eKin;
+}
+
+//! The calculation is only possible for two clouds!
+double Simulation::calculateCOMKineticEnergy()
+{
+	// TODO: mass is always 1!
+	double mass = entityManager_->getParticlesNo() * 1;
+	Vector velocity = Vector(0,0);
+
+	vector<Cloud*>* localClouds = entityManager_->getClouds();
+
+	// check the number of clouds
+	if(localClouds->size() != 2)
+		return -1;
+
+	Cloud* cloud1 = (*localClouds)[0];
+	Cloud* cloud2 = (*localClouds)[1];
+
+	velocity = cloud1->velocity_ - cloud2->velocity_;
+	//vector<Particle*>* localParticles = entityManager_->getParticles();
+	//vector<Particle*>::iterator i;
+
+	//for(i = localParticles->begin(); i != localParticles->end(); ++i)
+	//{
+	//	velocity += (*i)->velocity_;
+	//	mass =+ (*i)->getMass();
+	//}
+
+	return 0.5 * mass * velocity.squaredNorm();
 }
 
 double Simulation::calculatePotentialEnergy()

@@ -43,6 +43,8 @@ SimulationOptions::SimulationOptions()
 	outputTotalEnergy = false;
 	outputKineticEnergy = false;
 	outputPotentialEnergy = false;
+	outputAvgCloudRadius = false;
+	outputCOMKineticEnergy = false;
 
 	// set the default euqationSolver to be velocity-verlet
 	equationSolver = equationSolverTypeUnknown;
@@ -139,6 +141,10 @@ SimulationOptions* SimulationOptions::fromStringList(vector<string>* strings)
 			opt->outputKineticEnergy = (bool)intFromString(value);
 		else if (identifier == "outputPotentialEnergy")
 			opt->outputPotentialEnergy = (bool)intFromString(value);
+		else if (identifier == "outputCOMKineticEnergy")
+			opt->outputCOMKineticEnergy = (bool)intFromString(value);
+		else if (identifier == "outputAvgCloudRadius")
+			opt->outputAvgCloudRadius = (bool)intFromString(value);
 		else if (identifier == "harmonicInteractionMatrix")
 			{
 				if(matrixFromFile(&(opt->harmonicInteractionMatrix), value) == false)

@@ -116,7 +116,10 @@ public:
 	bool outputKineticEnergy;
 	//! Enables output of potential energy on each timestep
 	bool outputPotentialEnergy;
-
+	//! Enables output of the COM's kinetic energy
+	bool outputCOMKineticEnergy;
+	//! Enables output of the clouds average radius (averaged over all particle distances)
+	bool outputAvgCloudRadius;
 	//! Necessary for the harmonic interaction
 	unsigned int particleCount;
 

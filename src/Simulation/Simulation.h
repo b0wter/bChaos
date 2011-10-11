@@ -61,10 +61,12 @@ private:
 	void (Simulation::*move)(double, unsigned int);
 	INLINE void checkBoundaryConditions();							// checks if any particle is beyond the boundaries and relocates them accordingly
 	INLINE void calculateForces(vector<Particle*>* particles);
+	INLINE void outputStatisticsHeader(); // prints the header for the data output
 	INLINE void outputStatistics();	// prints various data in the terminal
 	double calculateTotalEnergy(); // computes the system's total energy
 	double calculatePotentialEnergy();
 	double calculateKineticEnergy();
+	double calculateCOMKineticEnergy();
 };
 
 } // end of namespace
