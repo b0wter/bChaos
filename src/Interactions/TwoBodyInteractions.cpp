@@ -133,6 +133,23 @@ void TwoBodyInteractions::computeHarmonicForce(unsigned int p1Index, Particle* p
 	LEAVE	;
 }
 
+/*!
+ * Calculates the force of the potential: ( M_ij * (r_i + r_j)^4 ) and saves it in
+ * both particle instances.
+ * NOTE: currently it is assumed that F_ij is equal to F_ji !
+ */
+void TwoBodyInteractions::computeFourthForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
+{
+	ENTER	;
+	Vector difference = ( *(p2->getPosition()) - *(p1->getPosition()) );
+	difference = (difference.cwise() * difference).cwise() * difference;
+	Vector force = 2 * harmonicInteractionMatrix(p1Index, p2Index) * difference;
+	Vector force1 = force; Vector force2 = -1 * force;
+
+	p1->addForce(&force1); p2->addForce(&force2);
+
+	LEAVE	;
+}
 
 double TwoBodyInteractions::computeGravitationalPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
 {
@@ -168,6 +185,16 @@ double TwoBodyInteractions::computeHarmonicPotential(unsigned int p1Index, Parti
 	return energy;
 }
 
+double TwoBodyInteractions::computeFourthPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
+{
+	ENTER	;
 
+	Vector v1 = *(p1->getPosition()); Vector v2 = *(p2->getPosition());
+
+	double energy = 0.5 * p1->getMass() * harmonicInteractionMatrix(p1Index,p2Index) *  (v1 - v2).squaredNorm() * (v1 - v2).squaredNorm();
+
+	LEAVE	;
+	return energy;
+}
 
 } // end of namespace
