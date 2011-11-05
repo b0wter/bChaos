@@ -102,6 +102,8 @@ public:
 	bool diagonalizedHarmonicForce;
 	//! Necessary for the diagonalized harmonic force
 	MatrixXd diagonalizedHarmonicInteractionMatrix;
+	//! Enables the simulation of the ^4 potential (using the same matrix as the harmonic potential)
+	bool fourthForce;
 	//! Enables the particles to save their own position history in an array for further analyzing.
 	bool saveParticleHistory;
 	//! Enables the clouds to save their own position history in an array for further analyzing.

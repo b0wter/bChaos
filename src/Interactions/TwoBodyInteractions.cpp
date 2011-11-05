@@ -15,6 +15,7 @@ TwoBodyInteractions::TwoBodyInteractions(SimulationSpace::SimulationOptions* opt
 	coulombForce_ = options->coulombForce;
 	gravitationalForce_ = options->gravitationalForce;
 	harmonicForce_ = options->harmonicForce;
+	fourthForce_ = options->fourthForce;
 
 	//TODO: outdated, should be removed soon
 	harmonicInteractionMatrix = options->harmonicInteractionMatrix;
@@ -27,8 +28,8 @@ TwoBodyInteractions::TwoBodyInteractions(SimulationSpace::SimulationOptions* opt
 
 	//cerr << harmonicInteractionMatrix << endl;
 
-	harmonicInteractionMatrixInter = options->harmonicInteractionMatrixInter;
-	harmonicInteractionMatrixIntra = options->harmonicInteractionMatrixIntra;
+	//harmonicInteractionMatrixInter = options->harmonicInteractionMatrixInter;
+	//harmonicInteractionMatrixIntra = options->harmonicInteractionMatrixIntra;
 
 	gravConstant_ = 6.67428e-11;
 }
@@ -48,6 +49,8 @@ void TwoBodyInteractions::compute(unsigned int p1Index, Particle* p1, unsigned i
 		computeCoulombForce(p1Index, p1,p2Index, p2);
 	if(harmonicForce_)
 		computeHarmonicForce(p1Index, p1, p2Index, p2);
+	if(fourthForce_)
+		computeFourthForce(p1Index, p1, p2Index, p2);
 
 	LEAVE	;
 }
@@ -64,6 +67,8 @@ double TwoBodyInteractions::computePotentialEnergy(unsigned int p1Index, Particl
 		Epot += computeCoulombPotential(p1Index, p1, p2Index, p2);
 	if(harmonicForce_)
 		Epot += 0.5 * computeHarmonicPotential(p1Index, p1, p2Index, p2);
+	if(fourthForce_)
+		Epot += 0.5 * computeFourthPotential(p1Index, p1, p2Index, p2);
 
 	return Epot;
 	LEAVE	;
@@ -141,12 +146,38 @@ void TwoBodyInteractions::computeHarmonicForce(unsigned int p1Index, Particle* p
 void TwoBodyInteractions::computeFourthForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
 {
 	ENTER	;
-	Vector difference = ( *(p2->getPosition()) - *(p1->getPosition()) );
-	difference = (difference.cwise() * difference).cwise() * difference;
-	Vector force = 2 * harmonicInteractionMatrix(p1Index, p2Index) * difference;
-	Vector force1 = force; Vector force2 = -1 * force;
 
-	p1->addForce(&force1); p2->addForce(&force2);
+	// check the clouds
+	int p1Cloud = -1, p2Cloud = -1;
+
+	if(p1Index < (unsigned int)harmonicInteractionMatrix.rows())
+		p1Cloud = 1;
+	else
+		p1Cloud = 2;
+
+	if(p2Index < (unsigned int)harmonicInteractionMatrix.rows())
+		p2Cloud = 1;
+	else
+		p2Cloud = 2;
+
+	// ^4 part
+	if(p1Cloud != p2Cloud)
+	{
+		Vector difference = ( *(p2->getPosition()) - *(p1->getPosition()) );
+		difference = (difference.cwise() * difference).cwise() * difference;
+		Vector force = 2 * harmonicInteractionMatrix(p1Index, p2Index) * difference;
+		Vector force1 = force; Vector force2 = -1 * force;
+
+		p1->addForce(&force1); p2->addForce(&force2);
+	}
+	// ^2 part
+	else
+	{
+		Vector force = harmonicInteractionMatrix(p1Index, p2Index) * ( *(p2->getPosition()) - *(p1->getPosition()) );
+		Vector force1 = force; Vector force2 = -1 * force;
+
+		p1->addForce(&force1); p2->addForce(&force2);
+	}
 
 	LEAVE	;
 }

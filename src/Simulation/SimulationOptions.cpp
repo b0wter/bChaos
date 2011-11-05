@@ -31,6 +31,7 @@ SimulationOptions::SimulationOptions()
 	gravitationalForce = false;
 	harmonicForce = false;
 	diagonalizedHarmonicForce = false;
+	fourthForce = false;
 	//harmonicInteractionMatrix = Matrix3d::Zero();
 
 	// disable the history
@@ -145,6 +146,8 @@ SimulationOptions* SimulationOptions::fromStringList(vector<string>* strings)
 			opt->outputCOMKineticEnergy = (bool)intFromString(value);
 		else if (identifier == "outputAvgCloudRadius")
 			opt->outputAvgCloudRadius = (bool)intFromString(value);
+		else if (identifier == "fourthForce")
+			opt->fourthForce = (bool)intFromString(value);
 		else if (identifier == "harmonicInteractionMatrix")
 			{
 				if(matrixFromFile(&(opt->harmonicInteractionMatrix), value) == false)

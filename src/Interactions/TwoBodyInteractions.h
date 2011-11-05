@@ -46,20 +46,21 @@ private:
 	double computeCoulombPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	double computeHarmonicPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	double computeFourthPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
-	double computeHarmonicPotentialDiagonalised(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
+	//double computeHarmonicPotentialDiagonalised(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 
 	// members
 	//vector<void (*)(unsigned int, Particle*, unsigned int, Particle*)> interactions_;
 	bool coulombForce_;
 	bool gravitationalForce_;
 	bool harmonicForce_;
+	bool fourthForce_;
 
 	double gravConstant_;
 
 	MatrixXd harmonicInteractionMatrix;
 
-	MatrixXd harmonicInteractionMatrixInter;
-	MatrixXd harmonicInteractionMatrixIntra;
+	//MatrixXd harmonicInteractionMatrixInter;
+	//MatrixXd harmonicInteractionMatrixIntra;
 };
 
 }
