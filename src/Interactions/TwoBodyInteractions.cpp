@@ -23,8 +23,8 @@ TwoBodyInteractions::TwoBodyInteractions(SimulationSpace::SimulationOptions* opt
 		// modifiy the matrix
 		for(int i = 0; i < options->harmonicInteractionMatrix.cols(); i++)
 			for(int j = 0; j < options->harmonicInteractionMatrix.rows(); j++)
-				if( (i < options->harmonicInteractionMatrix.cols()/2 && j < options->harmonicInteractionMatrix.rows()/2) || (i >= options->harmonicInteractionMatrix.cols()/2 && j >= options->harmonicInteractionMatrix.rows()/2))
-					harmonicInteractionMatrix(i,j) = 2 * options->harmonicInteractionMatrix(i,j);
+				if( (i >= options->harmonicInteractionMatrix.cols()/2 && j < options->harmonicInteractionMatrix.rows()/2) || (i < options->harmonicInteractionMatrix.cols()/2 && j >= options->harmonicInteractionMatrix.rows()/2))
+					harmonicInteractionMatrix(i,j) = 0.5 * options->harmonicInteractionMatrix(i,j);
 
 	//cerr << harmonicInteractionMatrix << endl;
 
