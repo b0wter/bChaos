@@ -220,6 +220,10 @@ string SimulationOptions::toString(bool commentary)
 	oss << comment << left << setw(30) << "gravitationalForce:" << setw(15) << right << this->gravitationalForce << endl;
 	oss << comment << left << setw(30) << "harmonicForce:" << setw(15) << right << this->harmonicForce << endl;
 	oss << comment << left << setw(30) << "diagonalHarmonicForce:" << setw(15) << right << this->diagonalizedHarmonicForce << endl;
+	if(this->harmonicForce)
+		oss << comment << left << setw(30) << "harmonic interaction matrix dim:" << setw(15) << right << this->harmonicInteractionMatrix.rows() << "x" << this->harmonicInteractionMatrix.cols() << endl;
+	if(this->diagonalizedHarmonicForce)
+		oss << comment << left << setw(30) << "harmonic interaction matrix dim:" << setw(15) << right << this->diagonalizedHarmonicInteractionMatrix.rows() << "x" << this->diagonalizedHarmonicInteractionMatrix.cols() << endl;
 	//cerr << left << setw(30) << "harmonicInteractionMatrix:" << endl;
 	//cerr << this->harmonicInteractionMatrix << endl;
 	oss << endl;

@@ -597,6 +597,7 @@ double Simulation::calculatePotentialEnergy()
 	{
 		ePot += globalInteractions_->computePotentialEnergy((*localParticles)[i],i);
 
+
 		for(unsigned int j = 0; j < localParticles->size(); j++)
 		{
 			//if(j == i)
@@ -607,7 +608,8 @@ double Simulation::calculatePotentialEnergy()
 	}
 
 	// calculate special interactions (which have their own inner loop)
-	ePot += specialInteractions_->computePotentialEnergy();
+	//HACK: The specialInteractions should be removed
+	//ePot += specialInteractions_->computePotentialEnergy();
 
 	return ePot;
 }

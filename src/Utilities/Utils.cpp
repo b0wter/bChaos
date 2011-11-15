@@ -119,9 +119,9 @@ unsigned int uintFromString(string s)
 
 double doubleFromString(string s)
 {
-	istringstream stream(s);
-	double d;
-	stream >> d;
+	//istringstream stream(s);
+	double d = atof(s.c_str());
+	//stream >> d;
 	return d;
 }
 

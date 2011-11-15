@@ -50,8 +50,10 @@ void OneBodyInteraction::computeDiagonalizedHarmonicForce(Particle* p, unsigned 
 {
 	ENTER	;
 
-	Vector force = -1 * p->getMass() * diagonalizedHarmonicInteractionMatrix(pIndex, pIndex) * *(p->getPosition());
+	Vector force = -2 * p->getMass() * diagonalizedHarmonicInteractionMatrix(pIndex, pIndex) * *(p->getPosition());
 	p->addForce(&force);
+
+	//cerr << diagonalizedHarmonicInteractionMatrix(pIndex,pIndex) << "\t" << p->position_.x() << "\t" << force.x() << endl;
 
 	// Alte Version:
 	/*
@@ -80,7 +82,7 @@ double OneBodyInteraction::computePotentialEnergy(Particle* p, unsigned int pInd
 double OneBodyInteraction::computeDiagonalizeHarmonicPotential(Particle* p, unsigned int pIndex)
 {
 	ENTER	;
-	double potential = 0.5 * p->getMass() * diagonalizedHarmonicInteractionMatrix(pIndex, pIndex) * p->position_.squaredNorm();
+	double potential = p->getMass() * diagonalizedHarmonicInteractionMatrix(pIndex, pIndex) * p->position_.squaredNorm();
 	LEAVE	;
 	return potential;
 }
