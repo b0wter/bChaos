@@ -31,7 +31,7 @@ SimulationOptions::SimulationOptions()
 	gravitationalForce = false;
 	harmonicForce = false;
 	diagonalizedHarmonicForce = false;
-	fourthForce = false;
+	pertubingForce = false;
 	//harmonicInteractionMatrix = Matrix3d::Zero();
 
 	// disable the history
@@ -146,8 +146,8 @@ SimulationOptions* SimulationOptions::fromStringList(vector<string>* strings)
 			opt->outputCOMKineticEnergy = (bool)intFromString(value);
 		else if (identifier == "outputAvgCloudRadius")
 			opt->outputAvgCloudRadius = (bool)intFromString(value);
-		else if (identifier == "fourthForce")
-			opt->fourthForce = (bool)intFromString(value);
+		else if (identifier == "pertubingForce")
+			opt->pertubingForce = (bool)intFromString(value);
 		else if (identifier == "harmonicInteractionMatrix")
 			{
 				if(matrixFromFile(&(opt->harmonicInteractionMatrix), value) == false)
@@ -158,16 +158,16 @@ SimulationOptions* SimulationOptions::fromStringList(vector<string>* strings)
 				if(matrixFromFile(&(opt->diagonalizedHarmonicInteractionMatrix), value) == false)
 					ERROR("Error reading the diagonalized harmonic interaction matrix file: " + value) ;
 			}
-		else if (identifier == "harmonicInteractionMatrixInter")
-			{
-				if(matrixFromFile(&(opt->harmonicInteractionMatrixInter), value) ==false)
-					ERROR("Error reading the diagonalized harmonic interaction matrix (inter cloud) file: " + value) ;
-			}
-		else if (identifier == "harmonicInteractionMatrixIntra")
-			{
-				if(matrixFromFile(&(opt->harmonicInteractionMatrixIntra), value) ==false)
-					ERROR("Error reading the diagonalized harmonic interaction matrix (intra cloud) file: " + value) ;
-			}
+//		else if (identifier == "harmonicInteractionMatrixInter")
+//			{
+//				if(matrixFromFile(&(opt->harmonicInteractionMatrixInter), value) ==false)
+//					ERROR("Error reading the diagonalized harmonic interaction matrix (inter cloud) file: " + value) ;
+//			}
+//		else if (identifier == "harmonicInteractionMatrixIntra")
+//			{
+//				if(matrixFromFile(&(opt->harmonicInteractionMatrixIntra), value) ==false)
+//					ERROR("Error reading the diagonalized harmonic interaction matrix (intra cloud) file: " + value) ;
+//			}
 		else
 			// no suitable identifier found :-O
 			// just give the information and continue

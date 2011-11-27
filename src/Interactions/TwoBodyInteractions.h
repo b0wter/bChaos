@@ -40,12 +40,12 @@ private:
 	inline void computeGravitationalForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	inline void computeCoulombForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	inline void computeHarmonicForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
-	inline void computeFourthForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
+	inline void computePertubingForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 
 	double computeGravitationalPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	double computeCoulombPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	double computeHarmonicPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
-	double computeFourthPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
+	double computePertubingPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 	//double computeHarmonicPotentialDiagonalised(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2);
 
 	// members
@@ -53,7 +53,7 @@ private:
 	bool coulombForce_;
 	bool gravitationalForce_;
 	bool harmonicForce_;
-	bool fourthForce_;
+	bool pertubingForce_;
 
 	double gravConstant_;
 

@@ -95,15 +95,15 @@ public:
 	 * Describes the strength of the harmonic interaction for each particle with every other particle.
 	 */
 	MatrixXd harmonicInteractionMatrix;
-	MatrixXd harmonicInteractionMatrixInter;
-	MatrixXd harmonicInteractionMatrixIntra;
+	//MatrixXd harmonicInteractionMatrixInter;
+	//MatrixXd harmonicInteractionMatrixIntra;
 
 	//! Enable the simulaton of the diagonalized harmonic force.
 	bool diagonalizedHarmonicForce;
 	//! Necessary for the diagonalized harmonic force
 	MatrixXd diagonalizedHarmonicInteractionMatrix;
 	//! Enables the simulation of the ^4 potential (using the same matrix as the harmonic potential)
-	bool fourthForce;
+	bool pertubingForce;
 	//! Enables the particles to save their own position history in an array for further analyzing.
 	bool saveParticleHistory;
 	//! Enables the clouds to save their own position history in an array for further analyzing.

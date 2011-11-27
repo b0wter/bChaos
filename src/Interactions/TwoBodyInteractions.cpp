@@ -15,7 +15,7 @@ TwoBodyInteractions::TwoBodyInteractions(SimulationSpace::SimulationOptions* opt
 	coulombForce_ = options->coulombForce;
 	gravitationalForce_ = options->gravitationalForce;
 	harmonicForce_ = options->harmonicForce;
-	fourthForce_ = options->fourthForce;
+	pertubingForce_ = options->pertubingForce;
 
 	//TODO: outdated, should be removed soon
 	harmonicInteractionMatrix = options->harmonicInteractionMatrix;
@@ -54,8 +54,8 @@ void TwoBodyInteractions::compute(unsigned int p1Index, Particle* p1, unsigned i
 		computeCoulombForce(p1Index, p1,p2Index, p2);
 	if(harmonicForce_)
 		computeHarmonicForce(p1Index, p1, p2Index, p2);
-	if(fourthForce_)
-		computeFourthForce(p1Index, p1, p2Index, p2);
+	if(pertubingForce_)
+		computePertubingForce(p1Index, p1, p2Index, p2);
 
 	LEAVE	;
 }
@@ -72,8 +72,8 @@ double TwoBodyInteractions::computePotentialEnergy(unsigned int p1Index, Particl
 		Epot += computeCoulombPotential(p1Index, p1, p2Index, p2);
 	if(harmonicForce_)
 		Epot += 0.5 * computeHarmonicPotential(p1Index, p1, p2Index, p2);
-	if(fourthForce_)
-		Epot += 0.5 * computeFourthPotential(p1Index, p1, p2Index, p2);
+	if(pertubingForce_)
+		Epot += 0.5 * computePertubingPotential(p1Index, p1, p2Index, p2);
 
 	return Epot;
 	LEAVE	;
@@ -149,7 +149,7 @@ void TwoBodyInteractions::computeHarmonicForce(unsigned int p1Index, Particle* p
  * both particle instances.
  * NOTE: currently it is assumed that F_ij is equal to F_ji !
  */
-void TwoBodyInteractions::computeFourthForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
+void TwoBodyInteractions::computePertubingForce(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
 {
 	ENTER	;
 
@@ -223,7 +223,7 @@ double TwoBodyInteractions::computeHarmonicPotential(unsigned int p1Index, Parti
 	return energy;
 }
 
-double TwoBodyInteractions::computeFourthPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
+double TwoBodyInteractions::computePertubingPotential(unsigned int p1Index, Particle* p1, unsigned int p2Index, Particle* p2)
 {
 	ENTER	;
 

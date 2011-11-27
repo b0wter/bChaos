@@ -14,8 +14,8 @@ SpecialInteractions::SpecialInteractions(SimulationOptions* opt, EntityManager* 
 {
 	entityManager_ = manager;
 	simulationOptions_ = opt;
-	harmonicInteractionMatrixInter = simulationOptions_->harmonicInteractionMatrixInter;
-	harmonicInteractionMatrixIntra = simulationOptions_->harmonicInteractionMatrixIntra;
+	//harmonicInteractionMatrixInter = simulationOptions_->harmonicInteractionMatrixInter;
+	//harmonicInteractionMatrixIntra = simulationOptions_->harmonicInteractionMatrixIntra;
 
 	if(simulationOptions_->harmonicForce)
 		this->harmonicForce = true;
