@@ -158,6 +158,11 @@ SimulationOptions* SimulationOptions::fromStringList(vector<string>* strings)
 				if(matrixFromFile(&(opt->diagonalizedHarmonicInteractionMatrix), value) == false)
 					ERROR("Error reading the diagonalized harmonic interaction matrix file: " + value) ;
 			}
+		else if (identifier == "pertubingInteractionMatrix")
+			{
+				if(matrixFromFile(&(opt->pertubingInteractionMatrix), value) == false)
+					ERROR("Error reading the pertubing interaction matrix file: " + value) ;
+			}
 //		else if (identifier == "harmonicInteractionMatrixInter")
 //			{
 //				if(matrixFromFile(&(opt->harmonicInteractionMatrixInter), value) ==false)

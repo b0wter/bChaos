@@ -95,6 +95,7 @@ public:
 	 * Describes the strength of the harmonic interaction for each particle with every other particle.
 	 */
 	MatrixXd harmonicInteractionMatrix;
+	MatrixXd pertubingInteractionMatrix;
 	//MatrixXd harmonicInteractionMatrixInter;
 	//MatrixXd harmonicInteractionMatrixIntra;
 

@@ -153,37 +153,13 @@ void TwoBodyInteractions::computePertubingForce(unsigned int p1Index, Particle* 
 {
 	ENTER	;
 
-	// check the clouds
-	int p1Cloud = -1, p2Cloud = -1;
+	Vector distance = ( *(p2->getPosition()) - *(p1->getPosition()) );
+	double distanceScalar = distance.norm() * distance.squaredNorm();
+	Vector unitVector = distance.normalized();
+	Vector force = (4*harmonicInteractionMatrix(p1Index, p2Index) * distanceScalar) * unitVector;
+	Vector force1 = force; Vector force2 = -1 * force;
 
-	if(p1Index < (unsigned int)harmonicInteractionMatrix.rows())
-		p1Cloud = 1;
-	else
-		p1Cloud = 2;
-
-	if(p2Index < (unsigned int)harmonicInteractionMatrix.rows())
-		p2Cloud = 1;
-	else
-		p2Cloud = 2;
-
-	// ^4 part
-	if(p1Cloud != p2Cloud)
-	{
-		Vector difference = ( *(p2->getPosition()) - *(p1->getPosition()) );
-		difference = (difference.cwise() * difference).cwise() * difference;
-		Vector force = 2 * harmonicInteractionMatrix(p1Index, p2Index) * difference;
-		Vector force1 = force; Vector force2 = -1 * force;
-
-		p1->addForce(&force1); p2->addForce(&force2);
-	}
-	// ^2 part
-	else
-	{
-		Vector force = harmonicInteractionMatrix(p1Index, p2Index) * ( *(p2->getPosition()) - *(p1->getPosition()) );
-		Vector force1 = force; Vector force2 = -1 * force;
-
-		p1->addForce(&force1); p2->addForce(&force2);
-	}
+	p1->addForce(&force1); p2->addForce(&force2);
 
 	LEAVE	;
 }
