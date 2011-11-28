@@ -229,6 +229,7 @@ string SimulationOptions::toString(bool commentary)
 		oss << comment << left << setw(30) << "harmonic interaction matrix dim:" << setw(15) << right << this->harmonicInteractionMatrix.rows() << "x" << this->harmonicInteractionMatrix.cols() << endl;
 	if(this->diagonalizedHarmonicForce)
 		oss << comment << left << setw(30) << "harmonic interaction matrix dim:" << setw(15) << right << this->diagonalizedHarmonicInteractionMatrix.rows() << "x" << this->diagonalizedHarmonicInteractionMatrix.cols() << endl;
+	oss << comment << left << setw(30) << "pertubingForce:" << setw(15) << right << this->pertubingForce << endl;
 	//cerr << left << setw(30) << "harmonicInteractionMatrix:" << endl;
 	//cerr << this->harmonicInteractionMatrix << endl;
 	oss << endl;
