@@ -30,6 +30,7 @@ TwoBodyInteractions::TwoBodyInteractions(SimulationSpace::SimulationOptions* opt
 		for(int j = 0; j < options->harmonicInteractionMatrix.rows(); j++)
 			harmonicInteractionMatrix(i,j) = 2 * harmonicInteractionMatrix(i,j);
 
+	pertubingInteractionMatrix = options->pertubingInteractionMatrix;
 
 	//cerr << harmonicInteractionMatrix << endl;
 
@@ -156,7 +157,7 @@ void TwoBodyInteractions::computePertubingForce(unsigned int p1Index, Particle* 
 	Vector distance = ( *(p2->getPosition()) - *(p1->getPosition()) );
 	double distanceScalar = distance.norm() * distance.squaredNorm();
 	Vector unitVector = distance.normalized();
-	Vector force = (4*harmonicInteractionMatrix(p1Index, p2Index) * distanceScalar) * unitVector;
+	Vector force = (4*pertubingInteractionMatrix(p1Index, p2Index) * distanceScalar) * unitVector;
 	Vector force1 = force; Vector force2 = -1 * force;
 
 	p1->addForce(&force1); p2->addForce(&force2);

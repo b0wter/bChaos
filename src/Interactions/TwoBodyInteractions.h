@@ -58,6 +58,7 @@ private:
 	double gravConstant_;
 
 	MatrixXd harmonicInteractionMatrix;
+	MatrixXd pertubingInteractionMatrix;
 
 	//MatrixXd harmonicInteractionMatrixInter;
 	//MatrixXd harmonicInteractionMatrixIntra;
