@@ -30,14 +30,14 @@ FileReader::~FileReader()
 
 bool FileReader::readLine(string* target)
 {
-	ENTER
+	//ENTER
 	if(input.good())
 	{
 		getline(input, *target);
-		LEAVE
+		//LEAVE
 		return true;
 	}
-	LEAVE
+	//LEAVE
 	return false;
 }
 

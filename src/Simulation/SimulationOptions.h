@@ -111,6 +111,8 @@ public:
 	bool saveCloudHistory;
 	//! Enables output of particle data
 	bool outputParticleData;
+	//! Enables output of momentum data
+	bool outputMomentum;
 	//! Enables output of cloud data
 	bool outputCloudData;
 	//! Enables output of total energy each timesteap
