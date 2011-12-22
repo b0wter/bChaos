@@ -278,6 +278,16 @@ void Simulation::outputStatisticsHeader()
 		cout << "Center X\tY";
 	}
 
+	if(simulationOptions_->outputMomentum)
+	{
+		vector<Particle*>* localParticles = entityManager_->getParticles();
+		for(unsigned int i = 0; i < localParticles->size(); i++)
+		{
+
+			cout << "Momentum " << i << " X\tY           \t";
+		}
+	}
+
 	if(simulationOptions_->outputTotalEnergy)
 		cout << "Total energy\t";
 	if(simulationOptions_->outputKineticEnergy)
@@ -314,6 +324,22 @@ void Simulation::outputStatistics()
 			cout << (*localParticles)[i]->position_[0] << "\t" << (*localParticles)[i]->position_[1] << "\t";
 #ifdef THREE_DIMENSIONS
 			cout << (*localParticles)[i]->position_[2] << "\t";
+#endif
+			(*localParticles)[i]->saveHistory();
+		}
+	}
+
+	// momentum data may be needed in some cases
+	if(simulationOptions_->outputMomentum)
+	{
+		vector<Particle*>* localParticles = entityManager_->getParticles();
+		for(unsigned int i = 0; i < localParticles->size(); i++)
+		{
+			Vector momentum = ((*localParticles)[i]->velocity_*(*localParticles)[i]->mass_);
+			cout << momentum[0] << "\t" << momentum[1] << "\t";
+			//cout << (*localParticles)[i]->velocity_[0]* (*localParticles)[i]->mass_ << "\t" << (*localParticles)[i]->velocity_[1] * (*localParticles)[i]->mass_ << "\t";
+#ifdef THREE_DIMENSIONS
+			cout << (*localParticles)[i]->velocity_[2] << "\t";
 #endif
 			(*localParticles)[i]->saveHistory();
 		}
