@@ -24,13 +24,12 @@ Afterwards (and after checking you have install eigen2, see below) you simply ha
 Dependencies
 ============
 The only depency is the development version of the eigen2 library. You can install them with the following commands:
-
 Debian:
     $ [sudo] apt-get install libeigen2-dev
 
 Fedora:
     # yum install eigen2-devel.noarch
-
+Be careful to not install version 3 of eigen.
 
 Links
 =====
