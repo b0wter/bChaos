@@ -1,16 +1,13 @@
-bChaos - molecular dynamics somulator
-=====================================
-
-What is is?
+What is it?
 -----------
 bChaos is a molecular dynamics simulator that implements a couple of basic potentials (Coulomb, gravitational) and a very special harmonic potential that was used to evaluate a certain behaviour of particle groups (details can be found [here][1]).
 
 Compiling
 =========
-The repository contains a makefile. In order to use it you need to have some basic development tool installed.
+The repository contains a makefile. In order to use it you need to have some basic development tools installed.
 To install these tools on Debian based distributions run the command:
 
-    $ [sudo] apt-get install build-essentials'
+    $ sudo apt-get install build-essentials'
 
 On Fedora based distributions you have to run the following commands as root:
 
@@ -20,13 +17,15 @@ On Fedora based distributions you have to run the following commands as root:
 Afterwards (and after checking you have install eigen2, see below) you simply have to enter the make command in the project directory:
 
     $ make
+    
+which will create an executeable names "bChaos".
 
 Dependencies
 ============
 The only depency is the development version of the eigen2 library. You can install them with the following commands:
 Debian:
 
-    $ [sudo] apt-get install libeigen2-dev
+    $ sudo apt-get install libeigen2-dev
     
 Fedora:
 
@@ -34,6 +33,8 @@ Fedora:
     
 Be careful to not install version 3 of eigen.
 
-Links
+Usage
 =====
+A detailed usage guide is found is the documentation folder. Open the index.htm file with your browser.
+
 [1]: https://github.com/b0wter/DA  "Spreading in integrable and non-integrable multi body systems"
