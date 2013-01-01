@@ -36,4 +36,4 @@ Be careful to not install version 3 of eigen.
 
 Links
 =====
-[1]: 'https://github.com/b0wter/DA'  "Spreading in integrable and non-integrable multi body systems"
+[1]: https://github.com/b0wter/DA  "Spreading in integrable and non-integrable multi body systems"
