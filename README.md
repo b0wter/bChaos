@@ -1,5 +1,5 @@
-What is it?
------------
+About
+=====
 bChaos is a molecular dynamics simulator that implements a couple of basic potentials (Coulomb, gravitational) and a very special harmonic potential that was used to evaluate a certain behaviour of particle groups (details can be found [here][1]).
 
 Compiling
