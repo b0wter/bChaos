@@ -99,8 +99,15 @@ int main(int argc, char** argv)
  * bool                      coulombForce
  * bool                      gravitationalForce
  * bool                      harmonicForce
- * bool 					 diagonalizedHarmonicForce
  * string                    harmonicInteractionMatrix
+ * bool                      outputParticleData
+ * bool                      outputCloudData
+ * bool                      outputKineticEnergy
+ * bool                      outputPotentialEnergy
+ * bool                      outputTotalEnergy
+ * bool                      outputMomentum
+ * bool                      perturbingForce
+ * string                    perturbingInteractionMatrix
  *
  *	\endcode
  *	\n
